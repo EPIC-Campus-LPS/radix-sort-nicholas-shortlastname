@@ -13,7 +13,7 @@ import java.util.HashMap;
  * @version 1.0, 11/3/23
  */
 public class radixSort {
-    private String alphabet = "abcdefghijklmnopqrstuvwxyz ";
+    private String alphabet = " abcdefghijklmnopqrstuvwxyz";
     private String fileOutput = "";
     private HashMap<Character, Integer> alphabetized = new HashMap<Character, Integer>();
 
@@ -83,6 +83,11 @@ public class radixSort {
             //overwrite the main word list with the temporary one so the words are in sorted order
             stringWordList = tempStringWordList;
         }
+
+        for(int i = 0; i < stringWordList.length; i++){
+            stringWordList[i] = stringWordList[i].replaceAll(" ", "");
+        }
+
         makeKeyFile(fileName, stringWordList);
     }
 
@@ -131,40 +136,5 @@ public class radixSort {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Turns list in String[] format into a human-readable String
-     * Used for testing
-     *
-     * @param list list that will be turned into String
-     * @return human-readable String of contents of list
-     */
-        private String readList(String[] list){
-        String output = "";
-        for(String str : list) {
-            output += str + "|";
-        }
-        return output;
-    }
-    /**
-     * Turns hashmap into a human-readable String
-     * Used for testing
-     *
-     * @param hashmap HashMap that will be turned into a String
-     * @return human-readable String of contents of HashMap
-     */
-    private String readHashmap(HashMap<Character, LinkedList<String>> hashmap) {
-        String stringifiedHashmap = "[";
-        LinkedList<String> tempList;
-        for (int i = 0; i < alphabet.length(); i++) {
-            stringifiedHashmap += "[";
-            tempList = hashmap.get(alphabet.charAt(i));
-            for (int j = 0; j < tempList.size(); j++)
-                stringifiedHashmap += tempList.get(j) + "|";
-        }
-        stringifiedHashmap += "]";
-        stringifiedHashmap += "]";
-        return stringifiedHashmap;
     }
 }
